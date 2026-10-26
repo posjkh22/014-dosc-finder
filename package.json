@@ -1,0 +1,74 @@
+{
+  "name": "docs-finder",
+  "version": "1.0.0",
+  "description": "로컬 폴더의 텍스트와 Office · PDF 문서를 검색하는 데스크톱 앱",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "private": true,
+  "author": "Docs Finder",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "test": "node --test tests/*.test.js",
+    "test:ui": "node scripts/smoke-ui.js",
+    "samples": "node scripts/create-samples.js",
+    "search": "node scripts/search.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win portable",
+    "format": "prettier --write ui electron core scripts tests README.md package.json",
+    "format:check": "prettier --check ui electron core scripts tests README.md package.json"
+  },
+  "build": {
+    "appId": "local.docsfinder.app",
+    "productName": "Docs Finder",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "core/**/*",
+      "ui/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "Docs-Finder-${version}-${arch}.${ext}",
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    }
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "exceljs": "4.4.0",
+    "fast-xml-parser": "5.11.2",
+    "iconv-lite": "0.7.3",
+    "pdfjs-dist": "6.4.299",
+    "yauzl": "3.4.0"
+  },
+  "devDependencies": {
+    "@pdf-lib/fontkit": "1.1.1",
+    "@playwright/test": "1.64.1",
+    "docx": "9.14.0",
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3",
+    "jszip": "3.10.2",
+    "pdf-lib": "1.17.1",
+    "pptxgenjs": "4.0.1",
+    "prettier": "3.9.10"
+  },
+  "overrides": {
+    "exceljs": {
+      "uuid": "11.1.1"
+    },
+    "pptxgenjs": {
+      "image-size": "2.0.4"
+    }
+  }
+}
